@@ -24,14 +24,14 @@ public class Lesson9DistributedTask {
     public static void main( String[] args )
     {
         try {
-                zk = new ZooKeeper("127.0.0.1:2181", 3000,new Watcher() {
+                zk = new ZooKeeper("127.0.0.1:2182", 3000,new Watcher() {
                 // 监控所有被触发的事件
                     public void process(WatchedEvent event) {
                     
                     }
                 });
                 //zk.create("/task","timer".getBytes(), Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
-                //zk.create("/task/timer","timer".getBytes(), Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
+                zk.create("/task/timer","timer".getBytes(), Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
                 zkNode= zk.create("/task/timer/","1".getBytes(), Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL).replaceAll("/task/timer/", "");
         } catch (Exception e) {
             e.printStackTrace();
